@@ -1,0 +1,44 @@
+[
+  {
+    "ContainingType": "StudentMgmtAPI.Controllers.CourseController",
+    "Method": "AllCourse",
+    "RelativePath": "api/Course/AllCourse",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentMgmtAPI.Controllers.CourseController",
+    "Method": "CreateUpdateCourse",
+    "RelativePath": "api/Course/CreateUpdateCourse",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "postData",
+        "Type": "StudentMgmtAPI.ViewModel.CourseCreateUpdateVModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentMgmtAPI.Controllers.CourseController",
+    "Method": "DeleteCourse",
+    "RelativePath": "api/Course/DeleteCourse",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
