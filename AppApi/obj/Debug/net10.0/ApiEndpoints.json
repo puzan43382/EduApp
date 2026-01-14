@@ -1,6 +1,64 @@
 [
   {
-    "ContainingType": "StudentMgmtAPI.Controllers.CourseController",
+    "ContainingType": "EduAppAPI.Controllers.AcademicProgramController",
+    "Method": "AllAcademicProgram",
+    "RelativePath": "api/AcademicProgram/AllAcademicProgram",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EduAppAPI.Controllers.AcademicProgramController",
+    "Method": "CreateUpdateAcademicProgram",
+    "RelativePath": "api/AcademicProgram/CreateUpdateAcademicProgram",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "postData",
+        "Type": "EduAppAPI.ViewModel.AcademicProgramCreateUpdateVModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EduAppAPI.Controllers.AcademicProgramController",
+    "Method": "DeleteAcademicProgram",
+    "RelativePath": "api/AcademicProgram/DeleteAcademicProgram",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EduAppAPI.Controllers.AcademicProgramController",
+    "Method": "GetProgramWithCourse",
+    "RelativePath": "api/AcademicProgram/GetProgramWithCourse",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EduAppAPI.Controllers.CourseController",
     "Method": "AllCourse",
     "RelativePath": "api/Course/AllCourse",
     "HttpMethod": "GET",
@@ -10,7 +68,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "StudentMgmtAPI.Controllers.CourseController",
+    "ContainingType": "EduAppAPI.Controllers.CourseController",
     "Method": "CreateUpdateCourse",
     "RelativePath": "api/Course/CreateUpdateCourse",
     "HttpMethod": "POST",
@@ -19,14 +77,14 @@
     "Parameters": [
       {
         "Name": "postData",
-        "Type": "StudentMgmtAPI.ViewModel.CourseCreateUpdateVModel",
+        "Type": "EduAppAPI.ViewModel.CourseCreateUpdateVModel",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "StudentMgmtAPI.Controllers.CourseController",
+    "ContainingType": "EduAppAPI.Controllers.CourseController",
     "Method": "DeleteCourse",
     "RelativePath": "api/Course/DeleteCourse",
     "HttpMethod": "DELETE",
@@ -35,6 +93,80 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EduAppAPI.Controllers.CourseController",
+    "Method": "GetCourse",
+    "RelativePath": "api/Course/GetCourse",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EduAppAPI.Controllers.ProgramCourseController",
+    "Method": "CreateUpdateProgramCourseMapping",
+    "RelativePath": "api/ProgramCourse/CreateUpdateProgramCourseMapping",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "EduAppAPI.DTOs.ProgramCourseDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EduAppAPI.Controllers.ProgramCourseController",
+    "Method": "DeleteMapping",
+    "RelativePath": "api/ProgramCourse/DeleteMapping",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ProgramCourseMappingId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EduAppAPI.Controllers.ProgramCourseController",
+    "Method": "GetAllProgramCourse",
+    "RelativePath": "api/ProgramCourse/GetAllProgramCourse",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EduAppAPI.Controllers.ProgramCourseController",
+    "Method": "GetCoursesByProgramId",
+    "RelativePath": "api/ProgramCourse/GetCoursesByProgramId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ProgramId",
         "Type": "System.Int32",
         "IsRequired": false
       }

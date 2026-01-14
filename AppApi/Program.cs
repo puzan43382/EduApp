@@ -2,7 +2,7 @@
 using EduAppAPI.AppContext;
 using Microsoft.EntityFrameworkCore;
 
-namespace StudentMgmtAPI
+namespace EduAppAPI
 {
     public class Program
     {

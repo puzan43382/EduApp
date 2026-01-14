@@ -16,6 +16,27 @@ namespace EduAppAPI.Controllers
             _dbContext = dbContext;
         }
         [HttpGet]
+        public async Task<IActionResult> GetCourse(int id)
+        {
+            try
+            {
+                var Course = await _dbContext.Course
+                    .FirstOrDefaultAsync(C => C.CourseId == id);
+
+                if (Course == null)
+                    return NotFound(new
+                    {
+                        message = $"Course with ID {id} was not found"
+                    });
+
+                return Ok(Course);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Internal Server Error");
+            }
+        }
+        [HttpGet]
         public async Task<IActionResult> AllCourse()
         {
             var courses = await _dbContext.Course.ToListAsync();
@@ -27,7 +48,7 @@ namespace EduAppAPI.Controllers
 
             if (postData.Id > 0)
             {
-                var existingData = await _dbContext.Course.Where(cr => cr.ID == postData.Id).FirstOrDefaultAsync();
+                var existingData = await _dbContext.Course.Where(cr => cr.CourseId == postData.Id).FirstOrDefaultAsync();
                 if (existingData != null)
                 {
                     existingData.Title = postData.Name;
@@ -38,6 +59,11 @@ namespace EduAppAPI.Controllers
                 }
                 return BadRequest("No data found with the given ID");
             }
+            bool courseExists = await _dbContext.Course
+             .AnyAsync(cr => cr.Title == postData.Name);
+
+            if (courseExists)
+                return BadRequest("Course name already exists.");
             var newCourse = new Course
             {
                 CourseCode = postData.CourseCode,
@@ -55,12 +81,12 @@ namespace EduAppAPI.Controllers
         {
             try
             {
-                _dbContext.Course.Where(cr=> cr.ID == id).ExecuteDelete();
+                _dbContext.Course.Where(cr => cr.CourseId == id).ExecuteDelete();
                 await _dbContext.SaveChangesAsync();
                 return Ok("delete success");
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
                 return BadRequest("Internal Server Error");

@@ -1183,11 +1183,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\.net\\StudentMgmtAPI\\EduAppAPI.csproj",
+      "projectUniqueName": "C:\\OfficeProjects\\EduApp\\AppApi\\EduAppAPI.csproj",
       "projectName": "EduAppAPI",
-      "projectPath": "C:\\.net\\StudentMgmtAPI\\EduAppAPI.csproj",
+      "projectPath": "C:\\OfficeProjects\\EduApp\\AppApi\\EduAppAPI.csproj",
       "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-      "outputPath": "C:\\.net\\StudentMgmtAPI\\obj\\",
+      "outputPath": "C:\\OfficeProjects\\EduApp\\AppApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1258,7 +1258,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
