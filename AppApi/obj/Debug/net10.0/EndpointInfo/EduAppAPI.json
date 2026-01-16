@@ -205,19 +205,7 @@
         }
       }
     },
-    "/api/ProgramCourse/GetAllProgramCourse": {
-      "get": {
-        "tags": [
-          "ProgramCourse"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/ProgramCourse/CreateUpdateProgramCourseMapping": {
+    "/api/ProgramCourse/AddProgramWithMultipleCourses": {
       "post": {
         "tags": [
           "ProgramCourse"
@@ -226,74 +214,31 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ProgramCourseDTO"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProgramCourseDTO"
+                }
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ProgramCourseDTO"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProgramCourseDTO"
+                }
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ProgramCourseDTO"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProgramCourseDTO"
+                }
               }
             }
           },
           "required": true
         },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/ProgramCourse/GetCoursesByProgramId": {
-      "get": {
-        "tags": [
-          "ProgramCourse"
-        ],
-        "parameters": [
-          {
-            "name": "ProgramId",
-            "in": "query",
-            "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": [
-                "integer",
-                "string"
-              ],
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/ProgramCourse/DeleteMapping": {
-      "delete": {
-        "tags": [
-          "ProgramCourse"
-        ],
-        "parameters": [
-          {
-            "name": "ProgramCourseMappingId",
-            "in": "query",
-            "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": [
-                "integer",
-                "string"
-              ],
-              "format": "int32"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -353,6 +298,22 @@
           }
         }
       },
+      "CourseStatusDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        }
+      },
       "ProgramCourseDTO": {
         "type": "object",
         "properties": {
@@ -373,12 +334,13 @@
             "format": "int32"
           },
           "courseId": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
             "type": [
-              "integer",
-              "string"
+              "null",
+              "array"
             ],
-            "format": "int32"
+            "items": {
+              "$ref": "#/components/schemas/CourseStatusDTO"
+            }
           }
         }
       }

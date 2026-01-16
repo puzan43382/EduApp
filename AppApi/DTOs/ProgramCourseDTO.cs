@@ -4,6 +4,6 @@
     {
         public int Id { get; set; }
         public int ProgramId { get; set; }
-        public int CourseId { get; set; }
+        public List<CourseStatusDTO>? CourseId { get; set; }
     }
 }
