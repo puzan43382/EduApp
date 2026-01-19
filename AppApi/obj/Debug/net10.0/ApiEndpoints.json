@@ -130,5 +130,31 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EduAppAPI.Controllers.ProgramCourseController",
+    "Method": "GetAllCoursesByProgramId",
+    "RelativePath": "api/ProgramCourse/GetAllCoursesByProgramId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ProgramId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

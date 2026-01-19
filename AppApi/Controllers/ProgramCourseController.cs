@@ -24,75 +24,83 @@ namespace EduAppAPI.Controllers
         public async Task<IActionResult> AddProgramWithMultipleCourses(
           [FromBody] List<ProgramCourseDTO> dtoList)
         {
-            if (dtoList == null || !dtoList.Any())
-                return BadRequest("No data provided.");
-
-            //int totalProgramsUpdated = 0;
-
-            foreach (var dto in dtoList)
+            try
             {
-                bool programExists = await _dbcontext.AcademicProgram
-                    .AnyAsync(p => p.ProgramId == dto.ProgramId);
+                if (dtoList == null || !dtoList.Any())
+                    return BadRequest("No data provided.");
 
-                if (!programExists)
-                    return BadRequest($"Program does not exist: {dto.ProgramId}");
-
-                if (dto.CourseId == null || !dto.CourseId.Any())
-                    return BadRequest($"No CourseIds provided for ProgramId {dto.ProgramId}");
-
-                var activeCourseIds = dto.CourseId
-                .Where(c => c.IsActive == true)
-                .Select(c => c.Id)
-                .Distinct()
+                //int totalProgramsUpdated = 0;
+                var programIds = dtoList
+                .Select(dl => dl.ProgramId)
                 .ToList();
+                var allPrograms = await _dbcontext.AcademicProgram
+                        .Where(p => programIds.Contains(p.ProgramId)).ToListAsync();
 
-                if (!activeCourseIds.Any())
+                await _dbcontext.SaveChangesAsync();
+
+                return Ok(new
                 {
-                    var existing = await _dbcontext.ProgramCourseMapping
-                        .Where(pc => pc.ProgramId == dto.ProgramId)
-                        .ToListAsync();
-
-                    _dbcontext.ProgramCourseMapping.RemoveRange(existing);
-                   // totalProgramsUpdated++;
-                    continue;
-                }
-                var validCourseIds = await _dbcontext.Course
-                .Where(c => activeCourseIds.Contains(c.CourseId))
-                .Select(c => c.CourseId)
-                .ToListAsync();
-
-                var invalidCourseIds = activeCourseIds.Except(validCourseIds).ToList();
-                if (invalidCourseIds.Any())
-                    return BadRequest(
-                        $"Invalid CourseIds for ProgramId {dto.ProgramId}: {string.Join(", ", invalidCourseIds)}");
-
-            var existingMappings = await _dbcontext.ProgramCourseMapping
-                .Where(pc => pc.ProgramId == dto.ProgramId)
-                .ToListAsync();
-
-            _dbcontext.ProgramCourseMapping.RemoveRange(existingMappings);
-
-
-            var newMappings = activeCourseIds.Select(courseId =>
-                new ProgramCourseMapping
-                {
-                    ProgramId = dto.ProgramId,
-                    CourseId = courseId
-                }).ToList();
-
-            _dbcontext.ProgramCourseMapping.AddRange(newMappings);
-
-            //totalProgramsUpdated++;
-        }
-
-        await _dbcontext.SaveChangesAsync();
-
-            return Ok(new
+                    // ProgramsUpdated = totalProgramsUpdated,
+                    Message = "Program-course mappings replaced successfully"
+                });
+            }
+            catch (Exception ex)
             {
-               // ProgramsUpdated = totalProgramsUpdated,
-                Message = "Program-course mappings replaced successfully"
-            });
+                return BadRequest("Internal Server Error");
+            }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllCoursesByProgramId(
+                    int ProgramId,
+                    int page = 1,
+                    int pageSize = 2)
+        {
+            try
+            {
+                if (page < 1) page = 1;
+                if (pageSize < 1) pageSize = 2;
+
+                var groupQuery = _dbcontext.ProgramCourseMapping
+                .Where(w => ProgramId == 0 || w.ProgramId == ProgramId)
+                .GroupBy(g => new
+                {
+                    g.ProgramId,
+                    ProgramName = g.AcademicProgram.Title
+                })
+                .Select(group => new
+                {
+                    ProgramID = group.Key.ProgramId,
+                    ProgramName = group.Key.ProgramName,
+                    Courses = group.Select(c => new
+                    {
+                        CourseID = c.CourseId,
+                        CourseName = c.Course.Title
+                    }).ToList()
+                });
+                var totalPrograms = await groupQuery.CountAsync();
+
+                var pagedResult = await groupQuery
+                   .OrderBy(g => g.ProgramID)
+                   .Skip((page - 1) * pageSize)
+                   .Take(pageSize)
+                   .ToListAsync();
+                return Ok(new
+                {
+                    page,
+                    pageSize,
+                    totalPrograms,
+                    totalPages = (int)Math.Ceiling((double)totalPrograms / pageSize),
+                    data = pagedResult
+                });
+            }
+
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
     }
 }
 

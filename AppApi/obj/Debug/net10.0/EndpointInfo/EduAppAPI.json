@@ -245,6 +245,58 @@
           }
         }
       }
+    },
+    "/api/ProgramCourse/GetAllCoursesByProgramId": {
+      "get": {
+        "tags": [
+          "ProgramCourse"
+        ],
+        "parameters": [
+          {
+            "name": "ProgramId",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32",
+              "default": 2
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -333,7 +385,7 @@
             ],
             "format": "int32"
           },
-          "courseId": {
+          "courseStatus": {
             "type": [
               "null",
               "array"
