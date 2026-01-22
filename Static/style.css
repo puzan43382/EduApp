@@ -1,0 +1,23 @@
+/* body {
+  background-color: lightblue;
+} */
+button {
+  background-color: rgb(255, 255, 255);
+  border: 2px solid black;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.heading {
+  background-color: rgb(45, 45, 51);
+  color: rgb(255, 255, 255);
+}
+.dark {
+  background-color: #121212;
+  color: #d9d0d0;
+}
+.light {
+  background-color: white;
+  color: rgb(0, 0, 0);
+}
+
